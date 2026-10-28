@@ -1,0 +1,31 @@
+---
+layout: runbook
+title: '0002 · Merge reports by established cause'
+owner: Konrad Nowak and OpenCode
+status: proposed
+reviewed: '2026-10-28'
+signature: 'v1.eyJzdWIiOiIyMDYyIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMxOTAyNzUsImV4cCI6MTc5MzI3NjY3NX0.k5K4NVFxU1uiZZA6RaqrONar_WM2vJWqRo7r-CMiRVA'
+---
+
+<script>
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+## Context
+
+The [review of #4471](/kb/incidents/4471-review) demonstrates that subject matching collapsed independent parser and booking-form-hint defects into one ticket. The old [decision 0001](/kb/decisions/0001-dedupe-by-subject) remains intact as an accepted historical record.
+
+## Replacement rule
+
+This proposal supersedes subject-only matching for the reviewed incident. Establish the tenant, its locale, form version and report channel. Merge only reports sharing a verified cause. Subject similarity is a search aid, not a merge decision. When evidence is missing or symptoms conflict with the classifier, retain the report for investigation.
+
+For this export, `causeOf` and `sameCause` implement the operational distinction. Their output is a classification rather than proof of a production root cause; anomalous report bodies still need investigation.
+
+<DedupeExplorer />
+
+## Consequences
+
+Maintain one engineering issue for each established defect, link its report IDs, and compute counts after deduplicating by report ID. Review the rule with the support desk before adopting it beyond this incident. Rebuild the knowledge base when exports change and check sources, rendered tables and dates together.
+
+<RenderStamp {signature} />

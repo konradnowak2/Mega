@@ -1,0 +1,11 @@
+{
+  "client.js": {
+    "file": "assets/client-DF_BUFEU.js",
+    "name": "client",
+    "src": "client.js",
+    "isEntry": true,
+    "css": [
+      "assets/client-ke-O4JjA.css"
+    ]
+  }
+}

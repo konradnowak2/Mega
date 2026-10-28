@@ -1,0 +1,49 @@
+---
+layout: runbook
+title: '#4471 review · separate parser and form-hint defects'
+owner: Konrad Nowak and OpenCode
+status: reviewed
+reviewed: '2026-10-28'
+signature: 'v1.eyJzdWIiOiIyMDYyIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMxOTAyNzUsImV4cCI6MTc5MzI3NjY3NX0.k5K4NVFxU1uiZZA6RaqrONar_WM2vJWqRo7r-CMiRVA'
+---
+
+<script>
+  import IncidentReview from '#lib/kb/IncidentReview.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+This review replaces the **one issue, one fix** interpretation of [the original incident](/kb/incidents/4471). It does not claim either production defect has been fixed. Evidence is the support export dated 2026-10-04; review date is not a newer data snapshot.
+
+## Problems and independent fixes
+
+- **Shared parser:** day-first tenant input is interpreted month first, swapping dates such as 2 December and 12 February. Respect the tenant's date convention or normalize explicit structured dates before parsing. Check app, email and booking-v2 paths, plus app/email from booking-v3 tenants.
+- **booking-v3 hint:** the form prints `MM/DD/YYYY` for day-first tenants while the form reads input in the tenant's order. Align the hint and actual parsing. A shared-parser fix alone does not correct this misleading form. Check alder.physio (de-DE), copper.studio (es-ES) and pale.harbour (pt-PT) on the form channel.
+
+Examples: R-41203 is a parser report from lantern.row; R-41230 is a booking-v3 form report from copper.studio even though intake tagged it parser. R-41205 is a parser report from morrow.tax despite its en-US browser locale and hint tag. The tenant directory, not the reporter's browser, controls the classification.
+
+<IncidentReview />
+
+## What the original components actually show
+
+<CauseTable ticket={4471} />
+
+<QueueTimeline ticket={4471} />
+
+## Triage correction
+
+The accepted [subject-only decision 0001](/kb/decisions/0001-dedupe-by-subject) is historical evidence, not reliable current guidance. Its accepted text remains unchanged. [Decision 0002](/kb/decisions/0002-dedupe-by-cause) proposes its replacement: merge only when the cause is established as the same. Equal subjects can conceal different bugs; different subjects can describe the same bug. Missing tenant evidence means hold for review, not automatic merge.
+
+<DedupeExplorer />
+
+## Verification and keeping this page current
+
+For each fix, test ambiguous dates (for example 03/04), unambiguous days above 12, and the tenant locales and input paths listed above. Check expected booking and invite dates end to end; a changed hint or unit parser result alone is insufficient. Investigate the anomalous reports with original timestamps and timezone details without asserting an unsupported third root cause.
+
+Counts are computed from unique IDs and tenant records by the supplied components. Rebuild after every desk export or tenant-directory change, reconcile totals, and inspect this rendered page before using it. Continue recording receivedAt separately from mergedAt. A growing queue or a new merge batch is not evidence that an old cause has disappeared.
+
+Sources: `src/lib/data/reports-4471.json`, `src/lib/data/tenants/*.json`, `src/lib/data/desk-notes.json`, `src/lib/kb/causes.ts`, `locales.ts`, `CauseTable.svelte`, `QueueTimeline.svelte`, `DedupeExplorer.svelte` and decision 0001.
+
+<RenderStamp {signature} />
