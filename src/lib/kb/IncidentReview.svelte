@@ -24,7 +24,7 @@
     {/each}
   </tbody>
 </table>
-<p>{disagreements} intake tags disagree with the tenant-and-channel classification. Use tenant locale and form version, not browser locale, intake tag, subject wording or export-row count.</p>
+<p>{disagreements} intake tags disagree with the tenant-and-channel classification. Use tenant locale and form version, not browser locale, intake tag, subject wording or export-row count. Historical counts are unchanged by the engineering closure.</p>
 
 <h2>Received is not merged</h2>
 <p>The largest merge batch was {peak[0]}: {peak[1]!.length} reports. Reports had already arrived in April; this batch is backlog processing, not evidence that the defect started in July.</p>

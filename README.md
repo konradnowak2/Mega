@@ -11,6 +11,8 @@ Run `npm ci`, `node generate-issues.mjs`, then `npm run build`. Serve `rendered/
 
 Source snapshot: 2026-10-04. Review: 2026-10-28. Computed split: 379 parser reports and 33 form-hint reports, from 412 unique report IDs (427 export rows). Rebuild and recheck when desk data changes.
 
+Engineering update: #4471 closed 2026-10-05. Parser fixed (`fix(dates): parse dd/mm for eu locales`); hint won't fix because booking-v3 was retired. [Parser issue #2](https://github.com/konradnowak2/Mega/issues/2) is completed; [hint issue #1](https://github.com/konradnowak2/Mega/issues/1) is not planned. See the review for the source and uncertainty boundaries.
+
 **kb** = knowledge base. What the support desk knows about how our products break, written
 down where the code can keep it honest.
 

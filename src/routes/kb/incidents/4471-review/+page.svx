@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 review · separate parser and form-hint defects'
 owner: Konrad Nowak and OpenCode
-status: reviewed
+status: closed
 reviewed: '2026-10-28'
 signature: 'v1.eyJzdWIiOiIyMDYyIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMxOTAyNzUsImV4cCI6MTc5MzI3NjY3NX0.k5K4NVFxU1uiZZA6RaqrONar_WM2vJWqRo7r-CMiRVA'
 ---
@@ -15,7 +15,16 @@ signature: 'v1.eyJzdWIiOiIyMDYyIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpY
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 </script>
 
-This review replaces the **one issue, one fix** interpretation of [the original incident](/kb/incidents/4471). It does not claim either production defect has been fixed. Evidence is the support export dated 2026-10-04; review date is not a newer data snapshot.
+This review replaces the **one issue, one fix** interpretation of [the original incident](/kb/incidents/4471). Report counts come from the support export dated 2026-10-04; review date is not a newer report snapshot.
+
+## Engineering disposition · 2026-10-05
+
+The live engineering update on the [Challenge page](https://hq.mega.dev/challenges/what-it-shows), checked on 2026-10-28, says #4471 closed on 5 October:
+
+- **Parser — fixed:** `fix(dates): parse dd/mm for eu locales`. [GitHub issue #2](https://github.com/konradnowak2/Mega/issues/2) is closed as completed on that evidence.
+- **Hint — won't fix:** booking-v3 form retired. [GitHub issue #1](https://github.com/konradnowak2/Mega/issues/1) is closed as not planned because the affected form was retired, not because its misleading hint was repaired.
+
+These are different resolutions. Neither changes the historical report counts. Production fixes were reported by engineering; this review did not independently test a production deployment. Preserve the anomalous report bodies below as unresolved causal evidence rather than treating closure as proof of their explanation.
 
 ## Problems and independent fixes
 
