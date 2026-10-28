@@ -5,6 +5,6 @@ export function renderPages() {
   return Object.entries(pages).map(([path, page]) => {
     const result = render(page.default);
     const route = path.replace('/src/routes', '').replace('/+page.svx', '');
-    return { route, ...result };
+    return { route, head: result.head, body: result.body };
   });
 }
